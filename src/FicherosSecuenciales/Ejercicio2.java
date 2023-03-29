@@ -34,15 +34,19 @@ public class Ejercicio2 {
             //Parte Usuario
             System.out.println("Introduce la tira de separacion:");
             String sep = tcl.nextLine();
+           
 
             String linea1 = br1.readLine();
-            String linea2 = br2.readLine();
-
-            while (linea1 != null && linea2 != null) {
-                String lineacomb = linea1 + sep + linea2;
-                bw.write(lineacomb);
+            while (linea1 != null) {
+                String linea2 = br2.readLine();
+                while (linea2 != null) {
+                    bw.write(linea1 + sep + linea2);
+                    bw.newLine();
+                    linea2 = br2.readLine();
+                }
+                br2.close();
+                br2 = new BufferedReader(new FileReader(fr2));
                 linea1 = br1.readLine();
-                linea2 = br2.readLine();
 
             }
 
@@ -57,7 +61,7 @@ public class Ejercicio2 {
             System.out.println(e.getMessage());
         } finally {
             try {
-                if (br1 != null && br2 != null && bw != null) {
+                if (br1 != null || br2 != null || bw != null) {
                     br1.close();
                     br2.close();
                     bw.close();

@@ -1,1 +1,4 @@
-aaaaaaaaaaaaaaaaaaa*bbbbbbbbbbbb
+hola|1
+hola|2
+adios|1
+adios|2
