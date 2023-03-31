@@ -9,6 +9,7 @@ import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.Scanner;
 
 /**
  *
@@ -17,16 +18,18 @@ import java.io.FileWriter;
 public class Ejercicio1 {
 
     public static void main(String[] args) {
-
+        Scanner tcl = new Scanner(System.in);
         String fr1 = "fichero1.txt";
         String fr2 = "fichero2.txt";
         BufferedReader br1 = null, br2 = null;
         BufferedWriter bw = null;
 
         try {
+            System.out.println("Introduce el nombre del fichero");
+            String ficherodestino = tcl.nextLine();
             br1 = new BufferedReader(new FileReader(fr1));
             br2 = new BufferedReader(new FileReader(fr2));
-            bw = new BufferedWriter(new FileWriter("archivo3.txt"));
+            bw = new BufferedWriter(new FileWriter(ficherodestino));
 
             //Leer las lineas de los dos archivos y combinarlas
             String linea1, linea2;

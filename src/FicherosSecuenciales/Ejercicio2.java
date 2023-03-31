@@ -27,15 +27,16 @@ public class Ejercicio2 {
         BufferedWriter bw = null;
 
         try {
-            br1 = new BufferedReader(new FileReader(fr1));
-            br2 = new BufferedReader(new FileReader(fr2));
-            bw = new BufferedWriter(new FileWriter("fichero2-3.txt"));
-
             //Parte Usuario
+            System.out.println("Introduce el nombre del fichero:");
+            String ficherodestino = tcl.nextLine();
             System.out.println("Introduce la tira de separacion:");
             String sep = tcl.nextLine();
-           
+            br1 = new BufferedReader(new FileReader(fr1));
+            br2 = new BufferedReader(new FileReader(fr2));
+            bw = new BufferedWriter(new FileWriter(ficherodestino));
 
+            //Parte Usuario
             String linea1 = br1.readLine();
             while (linea1 != null) {
                 String linea2 = br2.readLine();
