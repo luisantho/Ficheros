@@ -62,11 +62,14 @@ public class Ejercicio2 {
             System.out.println(e.getMessage());
         } finally {
             try {
-                if (br1 != null || br2 != null || bw != null) {
+                if (br1 != null) {
                     br1.close();
+                }
+                if (br2 != null) {
                     br2.close();
+                }
+                if (bw != null) {
                     bw.close();
-
                 }
 
             } catch (Exception e) {

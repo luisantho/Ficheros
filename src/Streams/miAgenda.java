@@ -65,5 +65,12 @@ public class miAgenda implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+    //ToString
+
+    @Override
+    public String toString() {
+        return "" + "nombre:" + nombre + ", direccion:" + direccion + ", fono:" + fono + ", email:" + email + '}';
+    }
+    
 
 }
