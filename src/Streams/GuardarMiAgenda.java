@@ -6,6 +6,7 @@ package Streams;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -20,16 +21,25 @@ public class GuardarMiAgenda {
 
     public static void main(String[] args) {
         Scanner flujoEntrada = new Scanner(System.in);
-        String cadena = "fichero.txt";
-        File f = new File(cadena);
+        //String cadena = "fichero.txt";
+
         String otro, fo, n, di, e;
 
         try {
-            f.createNewFile();
-            FileOutputStream ficha = new FileOutputStream(f);
-            BufferedOutputStream b = new BufferedOutputStream(ficha);
-            ObjectOutputStream d = new ObjectOutputStream(b);
+            File f = new File("agenda.dat");
+            ObjectOutputStream d;
 
+            if (f.exists()) {
+                FileOutputStream ficha = new FileOutputStream(f, true);
+                d = new MiObjectOutputStream(ficha);
+            } else {
+                FileOutputStream ficha = new FileOutputStream(f);
+                d = new ObjectOutputStream(ficha);
+
+            }
+            miAgenda agenda = new miAgenda();
+
+            //BufferedOutputStream b = new BufferedOutputStream(ficha);
             do {
                 System.out.println("Introduce tu nombre:");
                 n = flujoEntrada.nextLine();
@@ -54,9 +64,13 @@ public class GuardarMiAgenda {
             //Cerrar flujos
             d.close();
 
-        } catch (IOException i) {
-            System.err.println(i);
+        } catch (FileNotFoundException f) {
+            System.err.println(f);
 
+        }catch(IOException i){
+            System.out.println(i.getMessage());
+        }catch(Exception f){
+            System.out.println(f.getMessage());
         }
     }
 }

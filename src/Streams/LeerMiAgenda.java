@@ -5,6 +5,7 @@
 package Streams;
 
 import java.io.BufferedInputStream;
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -17,19 +18,24 @@ import java.io.ObjectInputStream;
  */
 public class LeerMiAgenda {
 
-    public static void main(String[] args) {
-        String cadena = "fichero.txt";
-        File f = new File(cadena);
+    public static void main(String[] args) throws IOException {
+        //String cadena = "fichero.txt";
+        File f = new File("agenda.dat");
         boolean fin = false;
+        FileInputStream ficha;
+        ObjectInputStream d;
+        BufferedInputStream b;
+        miAgenda agenda;
 
         try {
             //miAgenda agenda = new miAgenda();
-            FileInputStream ficha = new FileInputStream(f);
-            BufferedInputStream b = new BufferedInputStream(ficha);
-            ObjectInputStream d = new ObjectInputStream(b);
+            ficha = new FileInputStream(f);
+            b = new BufferedInputStream(ficha);
+            d = new ObjectInputStream(b);
+            agenda = new miAgenda();
 
             do {
-                miAgenda agenda = (miAgenda) d.readObject();
+                agenda = (miAgenda) d.readObject();
                 System.out.println("\n\nRegistro");
                 System.out.println("\nNombre :" + agenda.getNombre());
                 System.out.println("\nDireccion :" + agenda.getDireccion());
@@ -40,8 +46,11 @@ public class LeerMiAgenda {
 
             } while (!fin);
 
-        } catch (IOException i) {
-            System.err.println(i);
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+
+        } catch (EOFException i) {
+            System.err.println("Final de fichero");
 
         } catch (ClassNotFoundException e) {
             System.out.println("Error al encontrar el archivo");
