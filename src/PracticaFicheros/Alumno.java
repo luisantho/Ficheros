@@ -96,7 +96,7 @@ public class Alumno implements Serializable {
     //ToString
     @Override
     public String toString() {
-        return "Alumno" + "carnet:" + carnet + ", nombre:" + nombre + ", apellidos:" + apellidos + ", nota1:" + nota1 + ", nota2:" + nota2 + ", nota3:" + nota3;
+        return "Alumno " + "carnet:" + carnet + ", nombre:" + nombre + ", apellidos:" + apellidos + ", nota1:" + nota1 + ", nota2:" + nota2 + ", nota3:" + nota3;
     }
 
     //Metodo ponerDatos
@@ -108,12 +108,12 @@ public class Alumno implements Serializable {
             erroneo = true;
 
             try {
-                System.out.println("*****Introducir datos*****");
+                System.out.println("=====Introducir datos=====");
                 System.out.println("");
 
                 System.out.println("Introduce tu numero de carnet:");
                 int carnet = tcl.nextInt();
-
+                tcl.nextLine();
                 System.out.println("Introduce tu nombre:");
                 String nombre = tcl.nextLine();
 
@@ -132,6 +132,8 @@ public class Alumno implements Serializable {
                 Alumno a = new Alumno(carnet, nombre, apellidos, nota1, nota2, nota3);
                 lista.add(a);
                 System.out.println("Alumno añadido con exito");
+                
+                erroneo = false;
 
             } catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -148,6 +150,7 @@ public class Alumno implements Serializable {
             ost = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("alumnos.dat")));
             ost.writeObject(lista);
             ost.close();
+            System.out.println("Alumnos guardados con exito");
 
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
@@ -176,9 +179,55 @@ public class Alumno implements Serializable {
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
-    
-    
-    
     }
+    //Metodo Buscar por nombre
+    public static void buscar(ArrayList <Alumno> lista){
+        Scanner tcl = new Scanner (System.in);
+        boolean erroneo;
+        
+        do{
+            erroneo = true;
+            try{
+                System.out.println("=====Buscar=====");
+                System.out.println("Introduce el nombre:");
+                String nom = tcl.nextLine();
+                for (int i = 0; i < lista.size(); i++) {
+                    if(lista.get(i).nombre.equals(nom)){
+                        System.out.println(lista.get(i).toString());
+                    }
+                    
+                }
+                erroneo = false; 
+            }catch(Exception e){
+                System.out.println(e.getMessage());
+            }
+        }while(erroneo);
+    }
+    
+    //Metodo borrar Alunmo
+    public static void borrar(ArrayList <Alumno> lista){
+         Scanner tcl = new Scanner(System.in);
+         boolean erroneo;
+         do{
+             erroneo = true;
+             try{
+                 System.out.println("=====Borrar Alumno=====");
+                 System.out.println("Introduce el carnet del alumno");
+                 int carnet = tcl.nextInt();
+                 
+                 for (int i = 0; i < lista.size(); i++) {
+                     if(lista.get(i).carnet == carnet){
+                        lista.remove(i);
+                         System.out.println("Alumno eliminado con exito");
+                     }
+                 }
+             
+             }catch(Exception e){
+                 System.out.println(e.getMessage());
+             }
+         }while(erroneo);
+    }
+            
+    
 }
 
